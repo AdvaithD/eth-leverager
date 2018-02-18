@@ -33,6 +33,8 @@ contract EthLeverage {
 
     // min return is calculated on frontend by taking 95% of bancor sell dai price
     function sellDaiIntoEth(uint256 _amountDai, uint256 _minReturn) public returns (uint256) {
+        require(_amountDai > 0);
+
         BancorConverter bancor = BancorConverter(bancorConverterAddress);
         IERC20Token[] storage daiToEthConversionPath;
         daiToEthConversionPath[0] = dai;
@@ -45,10 +47,10 @@ contract EthLeverage {
         return bancor.quickConvert(daiToEthConversionPath, _amountDai, _minReturn);
     }
 
-
-
     // min return is calculated on frontend by taking 95% of bancor buy dai price
     function buyEthIntoDai(uint256 _amountEth, uint256 _minReturn) public returns (uint256) {
+        require(_amountEth > 0);
+
         BancorConverter bancor = BancorConverter(bancorConverterAddress);
         IERC20Token[] storage ethToDaiConversionPath;
         ethToDaiConversionPath[0] = bancorErc20Eth;
