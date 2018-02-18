@@ -23,9 +23,8 @@ contract MoneyMaker {
     public
     returns (uint fill_amt) {
       require(buy_amt > 0);
-
-      // Should be calling OasisDex.buyAllAmount(...);
-
+      require(max_fill_amount > 0)
+      OasisDex.buyAllAmount(buy_gem, buy_amt, pay_gem, max_fill_amount);
     }
 
   function sellAllAmount(ERC20 pay_gem, uint pay_amt, ERC20 buy_gem, uint
@@ -41,6 +40,7 @@ contract MoneyMaker {
   }
 
   // Not sure if needed
+  // possibly for use with the liquidate, buying dai wth eth. 
   function buyAllDai() external returns (uint256) {
     uint256 buyAmount = kWeth.balanceOf(msg.sender);
     uint256 maxFill = buyAmount;
