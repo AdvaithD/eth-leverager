@@ -24,7 +24,7 @@ contract MoneyMaker {
     returns (uint fill_amt) {
       require(buy_amt > 0);
       require(max_fill_amount > 0);
-      OasisDEX.buyAllAmount(buy_gem, buy_amt, pay_gem, max_fill_amount);
+      return OasisDEX.buyAllAmount(buy_gem, buy_amt, pay_gem, max_fill_amount);
     }
 
   function buyAllEth() external returns (uint256) {
