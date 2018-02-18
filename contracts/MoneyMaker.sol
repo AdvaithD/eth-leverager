@@ -24,6 +24,8 @@ contract MoneyMaker {
     returns (uint fill_amt) {
       require(buy_amt > 0);
 
+      // Should be calling OasisDex.buyAllAmount(...);
+
     }
 
   function sellAllAmount(ERC20 pay_gem, uint pay_amt, ERC20 buy_gem, uint
