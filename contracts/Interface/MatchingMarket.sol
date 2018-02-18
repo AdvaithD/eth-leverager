@@ -1,5 +1,7 @@
 pragma solidity ^0.4.18;
 
+import "./ERC20.sol";
+
 // File found here:
 // https://github.com/makerdao/maker-otc/blob/00cf7de5b8f61ec2bbee73dc64a62fa417d39661/src/matching_market.sol
 contract MatchingMarket {
