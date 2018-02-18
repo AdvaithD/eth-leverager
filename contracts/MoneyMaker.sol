@@ -23,12 +23,9 @@ contract MoneyMaker {
     public
     returns (uint fill_amt) {
       require(buy_amt > 0);
-      require(max_fill_amount > 0)
-      OasisDex.buyAllAmount(buy_gem, buy_amt, pay_gem, max_fill_amount);
+      require(max_fill_amount > 0);
+      OasisDEX.buyAllAmount(buy_gem, buy_amt, pay_gem, max_fill_amount);
     }
-
-  function sellAllAmount(ERC20 pay_gem, uint pay_amt, ERC20 buy_gem, uint
-                         min_fill_amount) {}
 
   function buyAllEth() external returns (uint256) {
     uint256 buyAmount = kDai.balanceOf(msg.sender);
