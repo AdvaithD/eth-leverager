@@ -27,7 +27,21 @@ contract MoneyMaker {
       return OasisDEX.buyAllAmount(buy_gem, buy_amt, pay_gem, max_fill_amount);
     }
 
-  function buyAllEth() external returns (uint256) {
+  // In our case, we want to Sell eth for dai 
+  function sellAllAmount(
+    ERC20 pay_gem,
+    uint pay_amt,
+    ERC20 buy_gem,
+    uint min_fill_amount)
+    public
+    returns (uint fill_amt) {
+      require(pay_amt > 0);
+      require(min_fill_amount > 0);
+      return OasisDEX.sellAllAmount(pay_gem, pay_amt, buy_gem, min_fill_amount);
+    }
+
+
+  function buyAllEthWithDai() external returns (uint256) {
     uint256 buyAmount = kDai.balanceOf(msg.sender);
     uint256 maxFill = buyAmount;
 
@@ -38,12 +52,11 @@ contract MoneyMaker {
 
   // Not sure if needed
   // possibly for use with the liquidate, buying dai wth eth. 
-  function buyAllDai() external returns (uint256) {
-    uint256 buyAmount = kWeth.balanceOf(msg.sender);
-    uint256 maxFill = buyAmount;
+  function sellAllEthForDai() external returns (uint256) {
+    uint256 sellAmount = kWeth.balanceOf(msg.sender);
+    uint256 minFill = sellAmount;
 
     // Return the amount filled by OasisDEX
-    return buyAllAmount(kDai, buyAmount, kWeth, maxFill);
+    return sellAllAmount(kWeth, sellAmount, kDai, minFill);
   }
-
 }
